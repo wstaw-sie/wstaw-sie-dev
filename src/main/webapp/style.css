@@ -1,0 +1,228 @@
+html
+{
+	font-size : 1.5em ;
+	color:  #474546 ; 
+	background-color: #ffffff;
+	text-align: center;
+	font-family: 'Geomteria Light';
+	font-style: normal;
+	
+	
+}
+
+.warning
+{
+	color: #ff0000;
+	font-size: 75%;
+}
+
+.notification
+{
+	color: #2fdd3b;
+	font-size: 75%;
+}
+
+header
+{
+	width: 740px;
+	float: center;
+}
+
+.inputLarge
+{
+	width:190px !important;
+}
+
+.inputSmall
+{
+	width:50px !important;
+}
+
+.font70p
+{
+	font-size: 70%;
+}
+
+.font50p
+{
+    font-size: 50%;
+}
+
+.lackOfmariginTopBottom
+{
+	line-height: 2.2;
+    margin: 0px 0 -10px 0;
+}
+
+body
+{
+	text-align: center;
+	float: center;
+}
+
+h1
+{
+	font-size: 100%;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+h3
+{
+	float : right;
+	text-align: right;
+	text-align: justify;
+}
+
+h4
+{
+	font-size: 40%;
+}
+
+header
+{
+	width:1000
+	background-color: #000000 ;
+	
+}
+p
+{
+	text-align: justify;
+}
+
+#container
+{
+	width: 740px;	
+	margin: 50px auto auto auto;
+	float: center;
+	border-width: 15px;	
+
+}
+
+.edit{
+font-size: 50%;
+margin-bottom: 10px; 
+}
+
+.underlinemenu{
+font-family: 'Tall Film';
+font-size: 200%;
+letter-spacing: 1px;
+font-weight: bold;
+width: 100%;
+}
+
+.underlinemenu ul{
+padding: 6px 0 7px 0; /*6px should equal top padding of "ul li a" below, 7px should equal bottom padding + bottom border of "ul li a" below*/
+margin: 0;
+text-align: center; /*set value to "left", "center", or "right"*/
+}
+
+.underlinemenu ul li{
+display: inline;
+}
+
+.underlinemenu ul li a{
+color: #d92f29;
+padding: 6px 3px 4px 3px; /*top padding is 6px, bottom padding is 4px*/
+margin-right: 20px; /*spacing between each menu link*/
+text-decoration: none;
+border-bottom: 3px solid #ffffff; /*bottom border is 3px*/
+}
+
+.underlinemenu ul li a:hover, .underlinemenu ul li a.selected{
+border-bottom-color: #d92f29;
+}
+
+
+#content
+{
+	width: 660px;
+	text-align: left;
+	background-color: #e3e3e3;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 40px;
+	float: center;
+}
+
+#footer
+{	
+	width: 740px;
+	clear: both;
+	float: left;
+	font-size: 11px;
+	color: #474546 ;
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+
+table
+{
+	text-align: left;
+}
+
+.info th
+{
+	font-size: 16px !important;
+}
+
+.info td
+{
+	font-size: 14px !important;
+}
+
+@font-face {font-family: 'MuseoSans-500';
+	src: url('fonts/MuseoSans_500.otf');
+	}
+	
+@font-face {font-family: 'MuseoSans300';
+src: url('fonts/museosans-300-webfont.ttf');
+}
+
+
+@font-face {font-family: 'MuseoSans-300Italic';
+	src: url('fonts/museosans_300_italic-webfont.eot');
+	}
+
+	
+@font-face {
+    font-family: 'SteelfishEbRegular';
+    src: url('fonts/steelfish_eb.otf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'SteelfishRgBoldItalic';
+    src: url('fonts/steelfish_bd_it.otf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Tall Film';
+    src: url('fonts/Tall Film.ttf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Geomteria Light';
+    src: url('fonts/Geometria-Light.otf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+	
+@font-face {
+    font-family: 'SteelfishRgRegular';
+    src: url('fonts/steelfish_rg.otf');
+    font-weight: normal;
+    font-style: normal;
+
+}

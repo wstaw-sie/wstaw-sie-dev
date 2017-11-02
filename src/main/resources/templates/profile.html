@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:include="fragments/general :: head">...</head>	
+	<body>
+		<div id="container">			
+			<header th:include="fragments/general :: header" id="header">...</header>	
+			<div class="underlinemenu" th:include="fragments/general :: menu_signed">...</div>			
+						<article id="content">
+				
+					<div th:if="${@sessionBean.isLogged()} and ${@sessionBean.loggedUser.hasPhoto()} == true">
+						<br/><center><img th:src= "${@sessionBean.getPhotoPath(@sessionBean.loggedUser.photoPath)}"/></center>
+					</div>
+					<center><h1>Twoje dane:<div class="edit"><a th:href="${@sessionBean.getPath('profile-edit')}">[edytuj]</a></div></h1></center>
+					<div><center><label th:text = "'Imię: ' + ${@sessionBean.loggedUser.firstName}">Imię: </label></center></div>
+					<div><center><label th:text = "'Nazwisko: ' + ${@sessionBean.loggedUser.lastName}">Nazwisko: </label></center></div>			
+					<div><center><label th:text = "'Email:' +${@sessionBean.loggedUser.email}">Email: </label></center></div>
+					<br/>
+					<div><center><label><b>Intencja:</b></label></center><center>
+					<form name ='intencja_form' method = 'POST' th:action="@{/profile}" th:object="${intentionForm}">
+					<textarea rows="8" cols="50" maxlength="400" 
+					name = 'intention' th:field="*{intention}" th:text="${@sessionBean.loggedUser.intention}">...</textarea>
+					<center><button type="button" onclick="location.href = 'profile';">Anuluj</button><input type="submit" value="Zapisz intencję"/></center>
+					</form></center></div>
+			</article>
+			<div th:include="fragments/general :: footer">...</div>									
+		</div>
+	</body>
+</html>

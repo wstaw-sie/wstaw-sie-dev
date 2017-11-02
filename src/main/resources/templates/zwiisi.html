@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/general :: head">...
+</head>
+<body>
+	<div id="container">
+		<header th:include="fragments/general :: header" id="header">...</header>
+			<div th:if="${@sessionBean.isLogged()}" class="underlinemenu"
+				th:include="fragments/general :: menu_signed">...</div>
+			<div th:if="${!@sessionBean.isLogged()}"
+				class="underlinemenu"
+				th:include="fragments/general :: menu_unsigned">...</div>
+		<article id="content">
+			<b>Aplikacja </b><br></br> W Dominiku troszczymy siÄ™ o
+			siebie nawzajem. Wiemy, Å¼e BÃ³g Å¼yje i dziaÅ‚a w modlÄ…cej siÄ™
+			wspÃ³lnocie, bo "Gdzie sÄ… dwaj albo trzej zebrani w imiÄ™ moje, tam
+			jestem poÅ›rÃ³d nichâ€� (Mt 18, 20). Tak jak nasz Ojciec Dominik, zanosiÅ‚
+			bÅ‚agania do Boga za swoimi braÄ‡mi, tak my za naszymi bliskimi. <br></br>
+			<br></br> <b>Jak wÅ‚Ä…czyÄ‡ siÄ™?</b><br></br> Napisz maila na <b>wstaw-sie[malpa]dadominik.pl</b>
+			i oczekuj na potwierdzenie z hasÅ‚em konta - login to email, z ktÃ³rego
+			wysÅ‚aÅ‚eÅ› proÅ›bÄ™ o utworzenie konta. Od tej pory moÅ¼esz ustawiÄ‡ w
+			serwisie swojÄ… intencjÄ™. A w zakÅ‚adce "Wstawiennik" zobaczysz osobÄ™
+			oraz intencjÄ™, ktÃ³rÄ… ona poleca Ci do omodlenia. Co tydzieÅ„, w sobotÄ™
+			wieczorem, otrzymasz maila z nazwiskiem kolejnej osoby z ktÃ³rÄ…
+			bÄ™dziecie siÄ™ wzajemnie omadlaÄ‡ (modlimy siÄ™ parami!). <br></br> <br></br>
+			<b>Do czego siÄ™ zobowiÄ…zujÄ™?</b><br></br> Do pamiÄ™tania w modlitwie o
+			osobie powierzonej Twojej opiece. <br></br> <br></br> <b>Czy sÄ…
+				jakieÅ› wymagania?</b><br></br> Tak - "Wstaw siÄ™!" to modlitwa â€žDominika"
+			- akcja nie obejmuje absolwentÃ³w oraz osÃ³b, ktÃ³re nie chcÄ…
+			uczestniczyÄ‡ w Å¼yciu naszego duszpasterstwa. <br></br> <br></br> <b>Czy
+				mogÄ™ zrezygnowaÄ‡?</b><br></br> OczywiÅ›cie - napisz krÃ³tkiego maila o
+			temacie "RezygnujÄ™" na adres akcji "Wstaw siÄ™!".<br></br> <br></br> <b>W
+				zakÅ‚adce "Wstawiennik" mam<br></br>"Duszpasterstwo Dominik" - co to
+				oznacza?
+			</b><br></br> W tym tygodniu omadlasz Dominika - proÅ› o obfite
+			bÅ‚ogosÅ‚awieÅ„stwo dla naszego duszpasterstwa, polecaj bieÅ¼Ä…ce potrzeby
+			i akcje. PamiÄ™taj, Å¼e w zamian moÅ¼esz liczyÄ‡ na modlitwÄ™ naszego
+			Dominika - odpowiedzialni codziennie polecajÄ… Bogu caÅ‚e DA.<br></br>
+			<br></br> <b>Kontakt</b><br></br> Administrator "Wstaw siÄ™!"<br></br>
+			Å�ukasz Michalczak<br></br> Email: wstaw-sie[malpa]dadominik.pl
+		</article>
+		<div th:include="fragments/general :: footer">...</div>
+	</div>
+</body>
+</html>

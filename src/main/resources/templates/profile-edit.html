@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="author" content="Paweł Kaliniak"/>
+		<meta name = "keywords" content = "Wstaw się - modlitwa w duszpasterstwie Dominik!"/>
+		<meta name = "description" content = "Wstaw się - wspólnie módlmy się za siebie nawzajem w Dominiku"/>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+		
+		<title>Wstaw się!</title>
+	</head>
+	<body>
+		<div id="container">
+			
+		<header th:include="fragments/general :: header" id="header">...</header>
+		<div class="underlinemenu" th:include="fragments/general :: menu_signed">...</div>	
+			
+			<article id="content">
+			
+							
+							<b>Dane które możesz zmienić:</b><br/>
+							
+							<h4 class="notification" th:if="${@sessionBean.isPasswordChangedSuccessfully()}" th:include="fragments/messages :: info_password_changed_successfully">...</h4>
+							
+							<font size ='3'><i>Hasło musi zawierać conajmniej 8 znaków. <br/>Zaleca się żeby zawierało też jedną dużą i małą literę, jedną cyfrę, oraz jeden znak specjalny.<br/>
+							Znaki specjalne to !#$%&amp;()*-./:;&lt;=&gt;?@[\]{}~</i></font>
+							
+							<form name ='register' method = 'post' th:action="@{/profile-edit}" th:object="${passwordChangeForm}">
+							
+							<table>
+							<tr><td><label>Stare hasło:</label></td><td><input id = "oldPassword" type = "password" th:name = "oldPassword" th:value = "${passwordChangeForm.oldPassword}" th:field="*{oldPassword}"/></td><td><h4 class="warning" th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}">Złe hasło</h4></td></tr>
+							<tr><td><label>Nowe hasło:</label></td><td><input id = "newPassword" type = "password" th:name = "newPassword" th:value = "${passwordChangeForm.newPassword}" th:field="*{newPassword}"/></td><td><h4 class="warning" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}">Podane hasło nie spełnia wymagań bezpieczeństwa</h4></td></tr>
+							<tr><td><label>Potwierdź hasło:</label></td><td><input id = "passwordConfirmation" type = "password" name = "passwordConfirmation" th:value = "${passwordChangeForm.passwordConfirmation}" th:field="*{passwordConfirmation}"/></td><td><h4 class="warning" th:if="${@sessionBean.isPasswordConfirmationError()}">Wprowadzone hasła nie są takie same</h4></td></tr>
+							</table>
+							
+							 <!--  
+							<table>
+							<tr><td><label>Stare hasło:</label></td><td><input id = "oldPassword" value = "*{oldPassword}" type = "password" name = "oldPassword" th:field="*{oldPassword}"/></td><td><h4 class="warning" th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}">Złe hasło</h4></td></tr>
+							<tr><td><label>Nowe hasło:</label></td><td><input id = "newPassword" value = "*{newPassword}" type = "password" name = "newPassword" th:field="*{newPassword}"/></td><td><h4 class="warning" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}">Podane hasło nie spełnia wymagań bezpieczeństwa</h4></td></tr>
+							<tr><td><label>Potwierdź hasło:</label></td><td><input id = "passwordConfirmation" value = "*{passwordConfirmation}" type = "password" name = "passwordConfirmation" th:field="*{passwordConfirmation}"/></td><td><h4 class="warning" th:if="${@sessionBean.isPasswordConfirmationError()}" th:errors="*{passwordConfirmation}">Wprowadzone hasła nie są takie same</h4></td></tr>
+							</table>
+							-->
+							
+
+							
+							<input type = 'submit' name = 'submit' value = 'Popraw'/>
+	<!--  -				<ul th:if="${#fields.hasErrors('*')}">
+  								<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+							</ul>
+	-->
+							</form>
+							
+							
+							<br/>
+							<b>Zdjęcie profilowe:</b><br/>
+							
+							<h4 class="notification" th:if="${@sessionBean.isPhotoChangedSuccessfully()}" th:include="fragments/messages :: info_photo_changed_successfully">...</h4>
+							
+							<font size ='3'><i>Zdjęcie może być formatu: jpg,gif,png; maksymalny rozmiar to 200 kB, maksymalna szerokość i wysokość to 500 pikseli.</i></font>
+							<table>
+							<tr>
+							<td>
+							<form th:action="@{/photoUpload}" method="post" enctype="multipart/form-data">
+							<table>
+							<tr><td><input type="file" name="photo" id="photo"/></td><td><h4 class="warning" th:if="${@sessionBean.isPhotoError()}">Przesłany plik nie spełnia określonych wymagań</h4></td></tr>
+							<tr><input th:if="${@sessionBean.loggedUser.hasPhoto()}" type="submit" name="submitImage" value="Popraw"/>
+							<input th:if="${!@sessionBean.loggedUser.hasPhoto()}" type="submit" name="submitImage" value="Dodaj"/>
+							</tr>
+							</table>
+							</form>
+							<form th:if="${@sessionBean.loggedUser.hasPhoto()}" th:action="@{/photoDelete}" method ='post' enctype='multipart/form-data'>
+							<input type='submit' name='deleteImage' value='Usuń'/>
+							</form>
+
+							</td> <td> 	</td>
+							</tr>
+							</table>
+			
+			</article>				
+			<div th:include="fragments/general :: footer">...</div>	
+		</div>
+	</body>
+</html>

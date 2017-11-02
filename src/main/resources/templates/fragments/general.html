@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head th:fragment="head">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="author" content="Paweł Kaliniak &amp; Michał Chyrowicz"/>
+		<meta name = "keywords" content = "Wstaw się - modlitwa w duszpasterstwie Dominik!"/>
+		<meta name = "description" content = "Wstaw się - wspólnie módlmy się za siebie nawzajem w Dominiku"/>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+		<link rel="icon" type="image/png" th:href="${@sessionBean.getPath('photos/favico.png')}"/>
+		
+		<title>Wstaw się!</title>
+	
+	</head>
+	  <body>
+		<header th:fragment="header" id="header">
+			<a th:href="${@sessionBean.getPath('login')}" title="Powrót na stronę główną">
+				<img src="img/wstawsie.jpg" alt="Logo strony" />
+			</a>
+		</header>
+		
+		<div th:fragment="menu_unsigned" class="underlinemenu">
+			<ul>
+				<li><a th:href="${@sessionBean.getPath('login')}" title="Strona główna">LOGOWANIE</a></li>
+				<li><a th:href="${@sessionBean.getPath('info')}" title="O akcji">INFO</a></li>
+			</ul>
+		</div>
+		
+		<div th:fragment="menu_signed" class="underlinemenu">
+			<ul>
+				<li><a th:href="${@sessionBean.getPath('profile')}" title="Twój profil">PROFIL</a></li>
+				<li><a th:href="${@sessionBean.getPath('praying')}"  title="Wstawiennik">WSTAWIENNIK</a></li>
+				<li th:if="${@sessionBean.isAdminOrSuperAdmin()} == true"><a th:href="${@sessionBean.getPath('admin')}" title='Admin'>ADMIN</a></li>
+				<li><a th:href="${@sessionBean.getPath('info')}" title="Info">INFO</a></li>
+				<li><a th:href="${@sessionBean.getPath('logout')}" title="Wyloguj">WYLOGUJ</a></li>
+			</ul>
+		</div>
+				
+	    <div th:fragment="footer">
+	      <footer id='footer'>&copy;2016 coding: Paweł Kaliniak &amp; Michał Chyrowicz &amp; zwiisi-team; design: Paweł Kaliniak &amp; Marta Dymarczyk;</footer>
+	    </div>
+	    
+	  </body>
+</html>

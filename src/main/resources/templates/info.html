@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/general :: head">...
+</head>
+<body>
+	<div id="container">
+		<header th:include="fragments/general :: header" id="header">...</header>
+			<div th:if="${@sessionBean.isLogged()}" class="underlinemenu"
+				th:include="fragments/general :: menu_signed">...</div>
+			<div th:if="${!@sessionBean.isLogged()}"
+				class="underlinemenu"
+				th:include="fragments/general :: menu_unsigned">...</div>
+		<article id="content">
+			<b>Dlaczego "Wstaw się!"?</b><br></br> W Dominiku troszczymy się o
+			siebie nawzajem. Wiemy, że Bóg żyje i działa w modlącej się
+			wspólnocie, bo "Gdzie są dwaj albo trzej zebrani w imię moje, tam
+			jestem pośród nich” (Mt 18, 20). Tak jak nasz Ojciec Dominik, zanosił
+			błagania do Boga za swoimi braćmi, tak my za naszymi bliskimi. <br></br>
+			<br></br> <b>Jak włączyć się?</b><br></br> Napisz maila na <b>wstaw-sie[malpa]dadominik.pl</b>
+			i oczekuj na potwierdzenie z hasłem konta - login to email, z którego
+			wysłałeś prośbę o utworzenie konta. Od tej pory możesz ustawić w
+			serwisie swoją intencję. A w zakładce "Wstawiennik" zobaczysz osobę
+			oraz intencję, którą ona poleca Ci do omodlenia. Co tydzień, w sobotę
+			wieczorem, otrzymasz maila z nazwiskiem kolejnej osoby z którą
+			będziecie się wzajemnie omadlać (modlimy się parami!). <br></br> <br></br>
+			<b>Do czego się zobowiązuję?</b><br></br> Do pamiętania w modlitwie o
+			osobie powierzonej Twojej opiece. <br></br> <br></br> <b>Czy są
+				jakieś wymagania?</b><br></br> Tak - "Wstaw się!" to modlitwa „Dominika"
+			- akcja nie obejmuje absolwentów oraz osób, które nie chcą
+			uczestniczyć w życiu naszego duszpasterstwa. <br></br> <br></br> <b>Czy
+				mogę zrezygnować?</b><br></br> Oczywiście - napisz krótkiego maila o
+			temacie "Rezygnuję" na adres akcji "Wstaw się!".<br></br> <br></br> <b>W
+				zakładce "Wstawiennik" mam<br></br>"Duszpasterstwo Dominik" - co to
+				oznacza?
+			</b><br></br> W tym tygodniu omadlasz Dominika - proś o obfite
+			błogosławieństwo dla naszego duszpasterstwa, polecaj bieżące potrzeby
+			i akcje. Pamiętaj, że w zamian możesz liczyć na modlitwę naszego
+			Dominika - odpowiedzialni codziennie polecają Bogu całe DA.<br></br>
+			<br></br> <b>Kontakt</b><br></br> Administrator "Wstaw się!"<br></br>
+			Łukasz Michalczak<br></br> Email: wstaw-sie[malpa]dadominik.pl
+		</article>
+		<div th:include="fragments/general :: footer">...</div>
+	</div>
+</body>
+</html>

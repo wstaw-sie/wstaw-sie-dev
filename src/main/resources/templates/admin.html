@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/general :: head">...
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<body>
+	<div id="container">
+		<header th:include="fragments/general :: header" id="header">...</header>
+		<div class="underlinemenu" th:include="fragments/general :: menu_signed">...</div>
+		<article id="content">			
+			<form name='reset' method='post' th:action="@{/admin}" th:object="${adminForm}">
+				<b>Reset / ustawienie hasła:</b><br />
+				<div>
+					<input th:name="reset_ile" type="radio" checked="checked" value="single" />
+					<label>Pojedyncze konto:</label><br /> 
+					<label>Id użytkownika:&nbsp; </label>
+					<input type="text" th:name="id_resetowanego" class="inputSmall" />
+				</div>
+				<div>
+					<input th:name="reset_ile" type="radio" value="multi" />
+					<label>Wiele kont:</label><br />
+					<label>Id użytkownika od:&nbsp; </label>
+					<input type="text" th:name="id_resetowanego_od" class="inputSmall" />
+					<label>&nbsp; do:&nbsp; </label>
+					<input type="text" th:name="id_resetowanego_do" class="inputSmall" />
+				</div>
+				<div>
+					<input type="checkbox" th:name="mail_notification" th:checked="${true}"/>Wysłać maila z hasłem na skrzynkę?
+				</div>
+				<input type="submit" name="submit" value="Resetuj hasło" /><br />
+			</form>
+			<br />
+			<form name='uploadCSV' method="post" th:action="@{/uploadCSV}" enctype="multipart/form-data">
+				<b>Import użytkowników (CSV):</b><br/>
+				<font size="3">Plik powinien być kodowany w UTF-8 formatu:<br/>
+					imie;nazwisko;email;haslo;id_grupy<br/> bez linii
+					nagłówka
+				</font><br/> <input type="file" name="file" id="file" /><br/>
+				<input type="submit" name="csv_submit" value="Prześlij" /><br/>  
+			</form>
+			<br /> <b>Lista użytkowników</b><br />
+			<table class="info">
+				<tbody>
+					<tr>
+						<th>Id&nbsp;</th>
+						<th>Imię&nbsp;</th>
+						<th>Nazwisko&nbsp;</th>
+						<th>E-mail&nbsp;</th>
+					</tr>
+					<tr th:each="person : ${users}">
+						<td th:text="${person.id}">&nbsp;Przykladowe_ID&nbsp;</td>
+						<td th:text="${person.firstName}">&nbsp;Przykladowe_Imie&nbsp;</td>
+						<td th:text="${person.lastName}">&nbsp;Przykladowe_nazwisko&nbsp;</td>
+						<td th:text="${person.email}">&nbsp;przykladowy_email@o2.pl&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			<!--  
+			<form method="get" th:action="@{/draw}">
+     			<input type="submit" id="drawBtn" value="Losuj"/>
+			</form>
+			-->  
+		</article>
+		<div th:include="fragments/general :: footer">...</div>
+	</div>
+</body>
+</html>

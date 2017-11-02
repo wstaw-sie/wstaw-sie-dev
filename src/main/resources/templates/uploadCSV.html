@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/general :: head">...
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<body>
+	<div id="container">
+		<header th:include="fragments/general :: header" id="header">...</header>
+		<div class="underlinemenu"
+			th:include="fragments/general :: menu_signed">...</div>
+		<article id="content">
+			<div th:if="${isUserListValid != null}">
+				<div th:if="${!isUserListValid}">
+					<h4 class="warning">Dodawanie uzytkowników zakończone
+						niepowodzeniem.</h4>
+					<div th:if="${#lists.size(incorrectLinesInFile) > 0}">
+						<h4 class="warning">Następujące linie są błędne:</h4>
+						<span class="warning" th:each="a, stat : ${incorrectLinesInFile}"
+							th:text=" ${incorrectLinesInFile[__${stat.index}__]}"></span>
+					</div>
+					<h4 th:if="${#lists.size(incorrectLinesInFile) == 0}"
+						class="warning">Sprawdź poprawność danych w pliku.</h4>
+				</div>
+				<div th:if="${isUserListValid}">
+					<h4 class="notification">Pomyślnie zakończono import
+						uzytkowników.</h4>
+					<div th:if="${#lists.size(users) > 0}">
+						<h4 class="notification">Dodani uzytkownicy:</h4>
+						<table class="info">
+							<tbody>
+								<tr>
+									<th>Id&nbsp;</th>
+									<th>Imię&nbsp;</th>
+									<th>Nazwisko&nbsp;</th>
+									<th>E-mail&nbsp;</th>
+								</tr>
+								<tr th:each="person : ${users}">
+									<td th:text="${person.id}">&nbsp;Przykladowe_ID&nbsp;</td>
+									<td th:text="${person.firstName}">&nbsp;Przykladowe_Imie&nbsp;</td>
+									<td th:text="${person.lastName}">&nbsp;Przykladowe_nazwisko&nbsp;</td>
+									<td th:text="${person.email}">&nbsp;przykladowy_email@o2.pl&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<br /> <br /> <a th:href="${@sessionBean.getPath('admin')}"
+				th:if="${@sessionBean.isAdminOrSuperAdmin()} == true">Wróć</a>
+		</article>
+		<div th:include="fragments/general :: footer">...</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Paweł Kaliniak &amp; Michał Chyrowicz" />
+<meta name="keywords"
+	content="Wstaw się - modlitwa w duszpasterstwie Dominik!" />
+<meta name="description"
+	content="Wstaw się - wspólnie módlmy się za siebie nawzajem w Dominiku" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<title>Wstaw się!</title>
+
+</head>
+<body>
+	<div id="container">
+		<header th:include="fragments/general :: header" id="header">...</header>
+		<div class="underlinemenu"
+			th:include="fragments/general :: menu_unsigned">...</div>
+
+
+		<p>Jesteś zablokowany na czas 45 sekund - po minięciu tego okresu
+			odśwież stronę</p>
+	</div>
+</body>
+</html>

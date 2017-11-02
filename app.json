@@ -1,0 +1,5 @@
+{
+  "name": "Wstaw się! on Heroku: Java",
+  "description": "Application to draw and send emails to praying pairs",
+  "addons": [ "heroku-postgresql" ]
+}

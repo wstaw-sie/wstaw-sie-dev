@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:include="fragments/general :: head">...</head>	
+	<body>
+		<div id="container">			
+			<header th:include="fragments/general :: header" id="header">...</header>	
+			<div class="underlinemenu" th:include="fragments/general :: menu_unsigned">...</div>			
+			<article id="content">
+				<form method='POST' action="#" th:action="@{/login}" th:object="${credentials}" width='600' class ='font70p'>
+				Login(email): <input type='text' th:field="*{email}"  class='inputLarge'/> &nbsp; &nbsp;
+				Hasło: <input type='password' th:field="*{passwordPlain}" class='inputLarge'/>
+				&nbsp;<input type='submit' value = 'Wejdź'/></form>
+				
+					<p align="center" class ='lackOfmariginTopBottom font70p'>- lub - <br/>
+					<a th:href="${@sessionBean.getPath('googleplus')}"><img src="img/gplus_pl_small.png" alt="Zaloguj z Google+" /></a><br/>
+					<a th:href="${@sessionBean.getPath('facebook')}"><img src="img/fb_pl_small.png" alt="Zaloguj z Facebook" /></a></p>
+				<h4 class="warning" th:if="${@sessionBean.getOAuth2ErrorAndResetToFalse()}" th:include="fragments/messages :: info_login_o_auth_no_account">...</h4>                        
+			</article>
+			<div th:include="fragments/general :: footer">...</div>									
+		</div>
+	</body>
+</html>

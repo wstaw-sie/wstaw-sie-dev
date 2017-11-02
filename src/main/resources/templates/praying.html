@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/general :: head">...
+</head>
+<body>
+	<div id="container">
+		<header th:include="fragments/general :: header" id="header">...</header>
+		<div class="underlinemenu"
+			th:include="fragments/general :: menu_signed">...</div>
+		<article id="content">
+
+			<div
+				th:if="${@sessionBean.isLogged()} and ${prayingPartner.hasPhoto()} == true">
+				<br />
+				<center>
+					<img th:src="${@sessionBean.getPhotoPath(prayingPartner.photoPath)}" />
+				</center>
+			</div>
+			<center>
+				<h1>Wstawia się za Tobą:</h1>
+			</center>
+			<div>
+				<center>
+					<label th:text="'Imię: ' + ${prayingPartner.firstName}">Imię:
+					</label>
+				</center>
+			</div>
+			<div>
+				<center>
+					<label th:text="'Nazwisko: ' + ${prayingPartner.lastName}">Nazwisko:
+					</label>
+				</center>
+			</div>
+			<div>
+				<center>
+					<label th:text="'Email:' +${prayingPartner.email}">Email:
+					</label>
+				</center>
+			</div>
+			<br />
+			<div>
+				<center>
+					<label><b>Intencja:</b></label>
+				</center>
+				<center>
+					<textarea rows="8" cols="50" maxlength="400" name='intention'
+						th:text="${prayingPartner.intention}" disabled="disabled">...</textarea>
+				</center>
+			</div>
+		</article>
+		<div th:include="fragments/general :: footer">...</div>
+	</div>
+</body>
+</html>

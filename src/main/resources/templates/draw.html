@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/general :: head">...
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<body>
+	<div id="container">
+		<header th:include="fragments/general :: header" id="header">...</header>
+		<div class="underlinemenu" th:include="fragments/general :: menu_signed">...</div>
+		<article id="content">			
+	
+		<center><h2>Wynik losowania</h2></center>
+		<table>
+				<tbody>
+					<tr>
+						<th>Nr pary&nbsp;</th>
+						<th>Osoby&nbsp;</th>
+						<th>Intencja&nbsp;</th>
+					</tr>
+					<tr th:each="pair, row : ${drawnUsers}">
+						<td th:text="${row.index}">&nbsp;Przykladowe_ID&nbsp;</td>
+						<td>
+							<p th:text="${pair.one.firstNameBasic} + ' ' + ${pair.one.secondNameBasic}"></p>
+							<p th:text="${pair.two.firstNameBasic} + ' ' + ${pair.two.secondNameBasic}"></p>
+						</td>
+						<td>
+							<p th:text="${pair.one.intencja}"></p>
+							<p th:text="${pair.two.intencja}"></p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		
+		
+		<form method="get" th:action="@{/admin}">
+     			<input type="submit" id="backBtn" value="Powrót"/>
+		</form> 
+		</article>
+		<div th:include="fragments/general :: footer">...</div>
+	</div>
+</body>
+</html>
