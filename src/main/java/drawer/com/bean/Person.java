@@ -12,7 +12,7 @@ public class Person {
 	String address;
 	String intencja;
 	String tekst;
-	int omadla;
+	Integer omadla;
 	public List<Integer> history; //historia wyciągnięta z bazy danych, aktualizowana wg potrzeb przy losowaniu
 	List<Integer> historyStat; //historia wyciągnięta z bazy danych, niezmienna
 	int id;
@@ -41,7 +41,7 @@ public class Person {
 		return id;
 	}
 	
-	public int getOmadla() {
+	public Integer getOmadla() {
 		return omadla;
 	}
 	

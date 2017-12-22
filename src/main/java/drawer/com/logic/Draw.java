@@ -20,16 +20,16 @@ public class Draw {
 
 	private static Logger logger  = Logger.getLogger(Draw.class);
 	
+	@Value("${mail.path}")
+	private String mailPath;
 	@Value("${mail.user}")
 	private String mailUser;
 	@Value("${mail.pass}")
 	private String mailPass;
 	@Value("${mail.host}")
 	private String mailHost;
-	@Value("${application.url}")
-	private String applicationURL;
 	
-	private int frequency = 2; //częstotliwość dozwolonych powtórzeń, w tygodniach, możliwe powtórzenie po frequency tygodniach
+	private int frequency = 4; //częstotliwość dozwolonych powtórzeń, w tygodniach, możliwe powtórzenie po frequency tygodniach
 	private List<Person> people=null;	//list of people in a database	<input>
 	private List<Pair> pary=null;		//list of pairs for the week	<output>
 	private List<String> teksty=null;	//list of quotations
@@ -55,11 +55,18 @@ public class Draw {
 		//cope with odd number of people
 		if(people.size()%2==1){
 			logger.info("Drawer - we have odd number of people");
+			for(Person pers:people)
+				logger.info("Drawer - omadla: "+ pers.getOmadla());
 			Random randDel = new Random();			   
 			int num2del = randDel.nextInt(people.size());
-			   
-			while(0==people.get(num2del).getOmadla() || notYet(0, people.get(num2del).getHistory())){
+			logger.info("Drawer - num2del: "+ num2del);
+			logger.info("Drawer - omadla: "+ people.get(num2del).getOmadla());
+			logger.info("Drawer - notYet: "+ notYet(null, people.get(num2del).getHistory()));
+			while(null==people.get(num2del).getOmadla() || notYet(null, people.get(num2del).getHistory())){
 				num2del = randDel.nextInt(people.size());
+				logger.info("Drawer - num2del: "+ num2del);
+				logger.info("Drawer - omadla: "+ people.get(num2del).getOmadla());
+				logger.info("Drawer - notYet: "+ notYet(null, people.get(num2del).getHistory()));
 			}
 			   
 			Pair halfPair=new Pair(people.get(num2del), people.get(num2del));
@@ -96,7 +103,11 @@ public class Draw {
 		//send emails
 		logger.info("Drawer - sending emails!");
 		send(dbConnector);
-		dbConnector.close();	
+		dbConnector.close();
+//		pary = new ArrayList<>();
+//		pary.add(new Pair(new Person(1, "aaa", "bb", "ccc", "ddd", "addre", "intencja", 1, null, "hjhh"), new Person(2, "zzz", "www", "ccc", "ddd", "addre", "intencja", 1, null, "hjhh")));
+//		pary.add(new Pair(new Person(3, "uuuu", "kkkk", "ccc", "ddd", "addre", "intencja", 1, null, "hjhh"), new Person(4, "yyyy", "eeee", "ccc", "ddd", "addre", "intencja", 1, null, "hjhh")));   
+		
 		return pary;
 	   }
 	   
@@ -122,7 +133,7 @@ public class Draw {
 			   //update history
 			   updateDatabase(freeMysql, para.one.getId(), para.two.getId(), para.one.getOmadla(), para.two.getOmadla());//* 
 			   logger.info("przed wyslaniem pary");
-			   Mail wiadomosc=new Mail(para, mailUser, mailPass, mailHost, applicationURL);
+			   Mail wiadomosc=new Mail(para, mailPath, mailUser, mailPass, mailHost);
 			   status=wiadomosc.sendMail();
 			   logger.info("Wyslano pare maili");
 			   wiadomosc=null;
@@ -131,9 +142,9 @@ public class Draw {
 	   }
 	   
 	   //sprawdza czy użytkonik z historią hist może dostać wstawiennika idx 
-	   private static boolean notYet(long idx, List<Integer> hist){
+	   private static boolean notYet(Integer idx, List<Integer> hist){
 		   
-		   for(int idxH :hist){			   
+		   for(Integer idxH :hist){			   
 			   if(idxH==idx) return true;			   
 		   }
 
@@ -210,11 +221,10 @@ public class Draw {
 			      }
 
 			      //usuwam najstarsze dane w historii, jeśli to konieczne
-			      if(maxHist==(frequency-1)){
+			      if(maxHist>=(frequency-1)){
 			    	  DatabaseManager editHistory= new DatabaseManager(freeMysql);
-			    	  logger.info("Drawer - deleting from archive");
-			    	  logger.info("MAXDATA IS: maxdata");
-			    	  editHistory.updateQuery("delete from archive where date= "+maxdata+";");
+			    	  logger.info("Drawer - deleting from archive with date "+maxdata.toString());
+			    	  editHistory.updateQuery("delete from archive where date= '"+maxdata.toString()+"'");
 			    	  editHistory.close();
 			    	  logger.info("Drawer - deletion ended");
 			      }
