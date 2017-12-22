@@ -17,7 +17,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories({"wstaw.sie.repository","demo.people"})
+@EnableJpaRepositories({"wstaw.sie.repository"})//,"demo.people"})
 @PropertySource(value = {"classpath:application.properties"})
 public class HibernateConfig {
 

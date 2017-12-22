@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.6.RELEASE</version>
+		<version>1.5.2.RELEASE</version>
 	</parent>
 	<artifactId>wstaw.sie</artifactId>
 	<version>1.0</version>
@@ -19,9 +19,9 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.fork>false</maven.compiler.fork>
-		<spring.version>4.2.4.RELEASE</spring.version>
+		<spring.version>4.3.7.RELEASE</spring.version>
 		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
-		<tomcat.version>7.0.64</tomcat.version>
+		<tomcat.version>8.5.23</tomcat.version>
 	</properties>
 
 	<dependencies>
@@ -59,6 +59,11 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.4.1212</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -113,11 +118,27 @@
 					</archive>
 				</configuration>
 			</plugin>
+<!-- <plugin>
+		<groupId>org.owasp</groupId>
+		<artifactId>dependency-check-maven</artifactId>
+		<version>3.0.2</version>
+		<executions>
+			<execution>
+				<goals>
+					<goal>check</goal>
+				</goals>
+			</execution>
+		</executions>
+	</plugin> -->
 		</plugins>
+		<!--  
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
-		</resources>
+            <resource>
+                <directory>src/main/webapp</directory>
+            </resource>
+		</resources>-->
 	</build>
 </project>

@@ -39,14 +39,14 @@ public class AdminController {
 
 	private static final int PASSWORD_LENGTH = 5;
 
-	@Value("${mail.path}")
-	private String mailPath;
 	@Value("${mail.user}")
 	private String mailUser;
 	@Value("${mail.pass}")
 	private String mailPass;
 	@Value("${mail.host}")
 	private String mailHost;
+	@Value("${application.url}")
+	private String applicationURL;
 	
 	@Resource
 	private LoginService loginService;
@@ -213,7 +213,7 @@ public class AdminController {
 	}
 
 	private String sendEmailWithNewPassword(User user, String password) {
-		Mail mail = new Mail(mailPath, mailUser, mailPass, mailHost);
+		Mail mail = new Mail(mailUser, mailPass, mailHost, applicationURL);
 		String status = mail.sendMailWithNewPassword(user, password);
 		return status;
 	}

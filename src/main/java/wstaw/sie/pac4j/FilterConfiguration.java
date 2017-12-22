@@ -5,7 +5,7 @@ import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 
 import org.pac4j.j2e.configuration.ClientsFactory;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

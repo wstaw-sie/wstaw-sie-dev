@@ -22,7 +22,7 @@ public class TaskScheduler {
 
 	private static Logger logger = Logger.getLogger(TaskScheduler.class);
 
-	@Scheduled(cron = "0 0 20 ? * SAT") //16 in US -> 22 in PL
+	@Scheduled(cron = "0 0 22 ? * SAT")
 	public void play() {
 		
 		Parameter parameter = parameterRepository.findByName("IS_RUNNING");

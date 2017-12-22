@@ -38,16 +38,15 @@ public class Mail {
 
 	String USERNAME;
 	String PASSWORD;
-	String templatePath;
+	String applicationURL;
 	
 	Pair people;
 	
-	public Mail(String mailPath, String mailUser, String mailPass, String mailHost) {
-		logger.info(mailPath + " " + mailUser + " " + mailPass + " " +mailHost);
+	public Mail(String mailUser, String mailPass, String mailHost, String applicationURL) {
 		USERNAME=mailUser;
 		PASSWORD=mailPass;
 		host=mailHost;
-		templatePath=mailPath;
+		this.applicationURL = applicationURL;
 		
 		properties = null;
 		setProperties();
@@ -55,8 +54,8 @@ public class Mail {
 		session = Session.getInstance(properties, authenticator);
 	}
 	
-	public Mail(Pair _people, String mailPath, String mailUser, String mailPass, String mailHost){
-		this(mailPath, mailUser, mailPass, mailHost);
+	public Mail(Pair _people, String mailUser, String mailPass, String mailHost, String applicationURL){
+		this(mailUser, mailPass, mailHost, applicationURL);
 		people=_people;
 	}
 	
@@ -88,6 +87,7 @@ public class Mail {
 		
 		String msg = readMessageTemplate("mail/passwordChanged.html");				
 		msg = msg.replace("{newPassword}", password);
+		msg = msg.replaceAll("{application_url}", applicationURL);
 		
 		message.setContent(msg, "text/html; charset=UTF-8");
 		return message;
@@ -145,6 +145,7 @@ public class Mail {
 		msg=msg.replace("{email}", p1.address);
 		msg=msg.replace("{what_for}", p1.intencja != null ? p1.intencja : "");
 		msg=msg.replace("{text}", p1.tekst);
+		msg=msg.replaceAll("{application_url}", applicationURL);
 		
 		try {
 			message.setContent(msg, "text/html; charset=UTF-8");

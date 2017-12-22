@@ -20,14 +20,14 @@ public class Draw {
 
 	private static Logger logger  = Logger.getLogger(Draw.class);
 	
-	@Value("${mail.path}")
-	private String mailPath;
 	@Value("${mail.user}")
 	private String mailUser;
 	@Value("${mail.pass}")
 	private String mailPass;
 	@Value("${mail.host}")
 	private String mailHost;
+	@Value("${application.url}")
+	private String applicationURL;
 	
 	private int frequency = 2; //częstotliwość dozwolonych powtórzeń, w tygodniach, możliwe powtórzenie po frequency tygodniach
 	private List<Person> people=null;	//list of people in a database	<input>
@@ -122,7 +122,7 @@ public class Draw {
 			   //update history
 			   updateDatabase(freeMysql, para.one.getId(), para.two.getId(), para.one.getOmadla(), para.two.getOmadla());//* 
 			   logger.info("przed wyslaniem pary");
-			   Mail wiadomosc=new Mail(para, mailPath, mailUser, mailPass, mailHost);
+			   Mail wiadomosc=new Mail(para, mailUser, mailPass, mailHost, applicationURL);
 			   status=wiadomosc.sendMail();
 			   logger.info("Wyslano pare maili");
 			   wiadomosc=null;

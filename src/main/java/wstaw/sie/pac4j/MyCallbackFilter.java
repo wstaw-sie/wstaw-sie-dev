@@ -38,6 +38,9 @@ import org.pac4j.j2e.filter.RequiresAuthenticationFilter;
 import org.pac4j.j2e.util.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.core.env.Environment;
 
 import wstaw.sie.model.entity.User;
 import wstaw.sie.service.FloodService;
@@ -59,7 +62,16 @@ public class MyCallbackFilter extends ClientsConfigFilter {
   @Resource
   private FloodService floodService;
   
+  @Resource
+  private Environment environment;
+  
   private static final Logger logger = LoggerFactory.getLogger(MyCallbackFilter.class);
+  
+	public static final String OAUTH_CALLBACK_LINK = "oauth.callback.link";
+	public static final String FACEBOOK_SECRET = "facebook.secret";
+	public static final String FACEBOOK_KEY = "facebook.key";
+	public static final String GOOGLE_SECRET = "google.secret";
+	public static final String GOOGLE_KEY = "google.key";
   
   private String defaultUrl = "/";
   private String blockedUrl = "/loginBlocked";
@@ -67,12 +79,21 @@ public class MyCallbackFilter extends ClientsConfigFilter {
   
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
+	  initOAuthProperties();
       super.init(filterConfig);
       this.defaultUrl = filterConfig.getInitParameter("defaultUrl");
       CommonHelper.assertNotBlank("defaultUrl", this.defaultUrl);
   }
   
-  @Override
+	private void initOAuthProperties() {
+		System.setProperty(GOOGLE_KEY, environment.getProperty(GOOGLE_KEY));
+		System.setProperty(GOOGLE_SECRET, environment.getProperty(GOOGLE_SECRET));
+		System.setProperty(FACEBOOK_KEY, environment.getProperty(FACEBOOK_KEY));
+		System.setProperty(FACEBOOK_SECRET, environment.getProperty(FACEBOOK_SECRET));
+		System.setProperty(OAUTH_CALLBACK_LINK, environment.getProperty(OAUTH_CALLBACK_LINK));
+	}
+
+@Override
   @SuppressWarnings({
       "unchecked", "rawtypes"
   })

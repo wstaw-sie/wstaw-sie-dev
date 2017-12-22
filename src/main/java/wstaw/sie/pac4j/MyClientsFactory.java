@@ -15,11 +15,11 @@ public class MyClientsFactory implements ClientsFactory {
 
 	@Override
 	public Clients build() {
-		String facebookKey = System.getenv("FACEBOOK_KEY");
-		String facebookSecret = System.getenv("FACEBOOK_SECRET");
-		String googleKey = System.getenv("GOOGLE_KEY");
-		String googleSecret = System.getenv("GOOGLE_SECRET");
-		String oauthCallbackLink = System.getenv("OAUTH_CALLBACK_LINK");
+		String facebookKey = System.getProperty(MyCallbackFilter.FACEBOOK_KEY);
+		String facebookSecret = System.getProperty(MyCallbackFilter.FACEBOOK_SECRET);
+		String googleKey = System.getProperty(MyCallbackFilter.GOOGLE_KEY);
+		String googleSecret = System.getProperty(MyCallbackFilter.GOOGLE_SECRET);
+		String oauthCallbackLink = System.getProperty(MyCallbackFilter.OAUTH_CALLBACK_LINK);
 		final MyFacebookClient facebookClient = new MyFacebookClient(facebookKey, facebookSecret);
 		facebookClient.setFields(FACEBOOK_FIELDS);
 		final MyGoogle2Client googleClient = new MyGoogle2Client(googleKey, googleSecret);
