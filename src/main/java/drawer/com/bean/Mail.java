@@ -87,7 +87,7 @@ public class Mail {
 		
 		String msg = readMessageTemplate("mail/passwordChanged.html");				
 		msg = msg.replace("{newPassword}", password);
-		msg = msg.replaceAll("{application_url}", applicationURL);
+		msg = msg.replace("{application_url}", applicationURL);
 		
 		message.setContent(msg, "text/html; charset=UTF-8");
 		return message;
@@ -143,7 +143,7 @@ public class Mail {
 		msg=msg.replace("{email}", p1.address);
 		msg=msg.replace("{what_for}", p1.intencja != null ? p1.intencja : "");
 		msg=msg.replace("{text}", p1.tekst);
-		msg=msg.replaceAll("{application_url}", applicationURL);
+		msg=msg.replace("{application_url}", applicationURL);
 		
 		try {
 			message.setContent(msg, "text/html; charset=UTF-8");

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import wstaw.sie.constant.ParameterConstant;
 import wstaw.sie.model.entity.Group;
 import wstaw.sie.model.entity.Parameter;
 import wstaw.sie.model.entity.UploadedFile;
@@ -48,8 +50,8 @@ public class UploadedFileServiceImpl implements UploadedFileService {
 
 	@Override
 	public void restoreUsersPhotosFromDatabase() {
-		Parameter parameter = parameterRepository.findByName("STORE_FILES_IN_DB");
-		if (parameter != null && "y".equalsIgnoreCase(parameter.getParamValue())) {
+		Parameter parameter = parameterRepository.findByName(ParameterConstant.KEY_STORE_FILES_IN_DB);
+		if (parameter != null && ParameterConstant.VALUE_YES.equalsIgnoreCase(parameter.getParamValue())) {
 			logger.info("... IN PROGRESS ...");
 			for(Group group: groupRepository.findAll()) {
 				createFoldersIfDontExist( this.photoPath + "/users/" + group.getId());
@@ -86,7 +88,10 @@ public class UploadedFileServiceImpl implements UploadedFileService {
 		logger.info("Image: " + directories.getAbsolutePath() + " , has been saved successfuly");
 		String relativePathToStore = dbPathToFolder + "/" + fileName;
 		UploadedFile uploadedFile = new UploadedFile();
-		uploadedFile.setBytes(myFile.getBytes());
+		String valueStoreInDB = Optional.ofNullable(parameterRepository.findByName(ParameterConstant.KEY_STORE_FILES_IN_DB)).map( v -> v.getParamValue()).orElse(null);
+		if(ParameterConstant.VALUE_YES.equalsIgnoreCase(valueStoreInDB)) {
+			uploadedFile.setBytes(myFile.getBytes());
+		}
 		uploadedFile.setFilenameWithPath(relativePathToStore);
 		this.save(uploadedFile);
 		return uploadedFile;

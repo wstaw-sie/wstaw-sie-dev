@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import wstaw.sie.constant.ParameterConstant;
 import wstaw.sie.model.entity.Parameter;
 import wstaw.sie.repository.ParameterRepository;
 import drawer.com.logic.Draw;
@@ -25,8 +26,8 @@ public class TaskScheduler {
 	@Scheduled(cron = "0 0 22 ? * SAT")
 	public void play() {
 		
-		Parameter parameter = parameterRepository.findByName("IS_RUNNING");
-		if(parameter != null && parameter.getParamValue() != null && parameter.getParamValue().equalsIgnoreCase("y"))
+		Parameter parameter = parameterRepository.findByName(ParameterConstant.IS_RUNNING);
+		if(parameter != null && parameter.getParamValue() != null && parameter.getParamValue().equalsIgnoreCase(ParameterConstant.VALUE_YES))
 		{
 			logger.info("Start draw scheduler");
 			draw.play();
