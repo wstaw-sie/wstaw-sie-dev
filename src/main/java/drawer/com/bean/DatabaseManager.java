@@ -44,7 +44,6 @@ public class DatabaseManager{
 
 		try {
 			statement=dbconnection.createStatement();
-			System.out.println(query); //TODO remove
 			statement.executeUpdate(query);
 			
 		} catch (SQLException e) {

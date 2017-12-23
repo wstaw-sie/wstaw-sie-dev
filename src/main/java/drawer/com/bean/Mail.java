@@ -138,8 +138,6 @@ public class Mail {
 		}else{
 			msg = readMessageTemplate("mail/za_da.html");
 		}		
-		System.out.println(msg);
-		System.out.println(p1.id);
 		msg=msg.replace("{name}", p1.firstNameBasic);
 		msg=msg.replace("{second_name}", p1.secondNameBasic);
 		msg=msg.replace("{email}", p1.address);
@@ -181,7 +179,6 @@ public class Mail {
 	
 	private Properties setProperties(){
 		properties = System.getProperties();
-		System.out.println("PORT: "+PORT + " HOST: " + host);;
 		properties.setProperty("mail.smtp.host", host);
         properties.put("mail.smtp.port", PORT);
         properties.put("mail.smtp.ssl.enable", true);
